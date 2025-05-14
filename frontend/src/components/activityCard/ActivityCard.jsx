@@ -7,6 +7,7 @@ import vinImg from "../../assets/activities/vinsmagning.jpg";
 import yogaImg from "../../assets/activities/yoga.jpg";
 import { IoIosArrowDown, IoIosArrowUp, IoIosHeart } from "react-icons/io";
 import { IoHeartDislikeOutline } from "react-icons/io5";
+import Swal from "sweetalert2";
 
 import { useLocalStorage } from "@uidotdev/usehooks";
 
@@ -16,12 +17,35 @@ const ActivityCard = ({ activity }) => {
 
   const isLiked = myList.includes(activity._id);
 
-  const handleLike = () => {
-    setMyList((prevList) =>
-      isLiked
-        ? prevList.filter((id) => id !== activity._id)
-        : [...prevList, activity._id]
-    );
+  const handleLike = async () => {
+    if (isLiked) {
+      const result = await Swal.fire({
+        title: "Er du sikker?",
+        text: "Denne aktivitet fjernes fra dine favoritter.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Ja, fjern",
+        cancelButtonText: "Annullér",
+      });
+
+      if (result.isConfirmed) {
+        setMyList((prevList) => prevList.filter((id) => id !== activity._id));
+        Swal.fire(
+          "Fjernet!",
+          "Aktiviteten er fjernet fra dine favoritter.",
+          "success"
+        );
+      }
+    } else {
+      setMyList((prevList) => [...prevList, activity._id]);
+      Swal.fire(
+        "Tilføjet!",
+        "Aktiviteten er tilføjet til dine favoritter.",
+        "success"
+      );
+    }
   };
 
   const activityImageMap = {

@@ -10,6 +10,8 @@ import Stay from "./pages/stay/Stay";
 import Footer from "./components/footer/Footer";
 import UserCard from "./components/userCard/UserCard";
 import Login from "./pages/login/Login";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const routes = useRoutes([
@@ -26,8 +28,18 @@ function App() {
   return (
     <div className="app">
       <Navigation />
-      <UserCard/>
+      <UserCard />
       <div className="content">{routes}</div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Footer />
     </div>
   );

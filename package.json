@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
+    "react-hook-form": "^7.56.3",
+    "react-toastify": "^11.0.5",
+    "sweetalert2": "^11.21.0",
+    "yup": "^1.6.1"
+  }
+}
